@@ -1,0 +1,67 @@
+﻿@model List<AnimalProject.Models.Animal>
+
+@{
+    ViewData["Title"] = "CategoryPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var categories = ViewBag.Categories;
+}
+
+<h3>Admin Page</h3>
+
+<div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="~/Catalog/CatalogPage?categoryName=All">All</a></li>
+            @foreach (var category in categories)
+            {
+                <li><a class="dropdown-item" href="~/Catalog/CatalogPage?categoryName=@category.Name">@category.Name</a></li>
+            }
+        </ul>
+        <a class="btn btn-primary" href="~/Admin/AddAnimalPage">Add new animal</a>
+    </div>
+</div>
+
+<table class="table-custom">
+    <thead>
+        <tr>
+            <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Number of comments</th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            @foreach (var animal in Model)
+            {
+                string link =(animal.AnimalId.ToString());
+                string pic = "picture" + @animal.AnimalId.ToString()+".jpg";
+                <tr>
+                    <td class ="img-td">
+                        <img src="~/Pictures/@link/@pic" alt="@animal!.Name" />
+                    </td>
+                    <td class="name-td">@animal.Name</td>
+                    <td class="desc-td ">@animal.Description</td>
+                    <td class="comment-td ">@animal.Comments!.Count</td>
+                    <td width="170px">
+                        <a class="btn btn-primary" href="~/Admin/EditAnimal?animalId=@animal.AnimalId">Edit</a>
+                        <a class="btn btn-danger" href="~/Admin/DeleteAnimal?animalId=@animal.AnimalId">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No animals found in this category.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

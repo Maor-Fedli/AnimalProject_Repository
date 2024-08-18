@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AnimalProject.Models.Animal>
+
+@{
+    ViewBag.Title = "Home";
+    int i = 0;
+}
+
+<h3>
+    The two most highly rated pets today are:
+</h3>
+
+<table class="table-custom">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Number of comments</th>
+            <th scope="col"></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+
+            @foreach(var animal in Model)
+            {
+            string link = (animal.AnimalId.ToString());
+            string pic = "picture" + @animal.AnimalId.ToString() + ".jpg";
+            <tr>
+                <th scope="row">@i</th>
+                <td>
+                    <img src="~/Pictures/@link/@pic" alt="@animal!.Name" />
+                </td>
+                <td>@animal.Name</td>
+                <td>@animal.Description</td>
+                <td>@animal.Comments!.Count</td>
+                <td>
+                    <a class="btn btn-primary" href="~/Animal/AnimalPage?animalId=@animal.AnimalId">Select</a>
+                </td>
+            </tr>
+            }
+       
+
+    </tbody>
+</table>
+
+

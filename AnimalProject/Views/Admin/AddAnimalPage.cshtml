@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "AddAnimalPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+
+<form method="post" action="AddAnimal" enctype="multipart/form-data">
+    <div>
+        <label for="animalName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="animalName" name="Name" style="width: 300px; height: 30px;" />
+    </div>
+
+    <div>
+        <label for="animalCategory" class="form-label">Category</label>
+        <input type="text" class="form-control" id="animalCategory" name="Category" style="width: 300px; height: 30px;" />
+    </div>
+
+    <div>
+        <label for="animalAge" class="form-label">Age</label>
+        <input type="number" class="form-control" id="animalAge" name="Age" style="width: 300px; height: 30px;" />
+    </div>
+
+    <div>
+        <label for="animalDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" id="animalDescription" name="Description" style="width: 300px; height: 30px;" />
+    </div>
+
+    <div>
+        <label for="animalImage" class="form-label">Upload Image</label>
+        <input type="file" class="form-control" id="animalImage" name="Image" accept=".jpg" />
+    </div>
+
+    <div style="margin-top: 20px;">
+        <button type="submit" class="btn btn-primary" id="AddAnimal">Add New Animal</button>
+
+    </div>
+</form>
+

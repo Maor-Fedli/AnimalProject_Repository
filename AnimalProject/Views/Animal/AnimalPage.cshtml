@@ -1,0 +1,119 @@
+﻿@model AnimalProject.Models.Animal
+
+@{
+    ViewData["Title"] = "AnimalPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string link = (Model.AnimalId.ToString());
+    string pictureActive = "picture" + Model.AnimalId + "1.jpg";
+    string pictureBase = "picture" + Model.AnimalId.ToString() + ".jpg";
+
+    var comments = ViewBag.Comments;
+}
+
+<h3>Animal Page</h3>
+<div id="carouseAnimal" class="carousel slide" style="width: 350px; margin: auto;">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouseAnimal" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouseAnimal" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouseAnimal" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Pictures/@link/@pictureBase" alt="@Model.Name" class="d-block mx-auto" width="350" height="300" />
+        </div>
+        @for (int i = 2; i <= 3; i++)
+        {
+            <div class="carousel-item">
+                <img src="~/Pictures/@link/@pictureBase" alt="@Model.Name" class="d-block mx-auto" width="350" height="300" />
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouseAnimal" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouseAnimal" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<br />
+<br />
+
+
+<div class="table-wrapper">
+<table class="table-information">
+    <tr>
+        <th class="td-A" scope="row">Name:</th>
+        <td class="td-A">@Model.Name</td>
+    </tr>
+    <tr>
+        <th class="td-B" scope="row">Age:</th>
+        <td class="td-B">@Model.Age</td>
+    </tr>
+    <tr>
+        <th class="td-A" scope="row">Description:  </th>
+        <td class="td-A">@Model.Description</td>
+    </tr>
+    <tr>
+        <th class="td-B" scope="row">Category:</th>
+        <td class="td-B">@Model.Category?.Name</td>
+    </tr>
+</table>
+
+<br />
+<br />
+
+<div>
+        <h5> Comments: </h5> 
+        @if (comments != null)
+        {
+        <ul>
+                @foreach (var comment in Model.Comments)
+                {
+                    <li>
+                        @comment.comment
+                    </li>
+                }
+        </ul>
+            
+        }
+        else
+        {
+            <div>
+                No comment
+            </div>
+        }
+</div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
+        Add Comment
+    </button>
+</div>
+
+<br />
+<br />
+
+<a href="c:\maor_sela\asp.net_core\animalproject\animalproject\controllers\admincontroller.cs">c:\maor_sela\asp.net_core\animalproject\animalproject\controllers\admincontroller.cs</a>
+
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="commentModalLabel">Add a Comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="AddComment">
+                    <div class="mb-3">
+                        <label for="commentText" class="form-label">Your Comment</label>
+                        <textarea class="form-control" id="commentText" name="commentText" rows="3" required></textarea>
+                    </div>
+                    <input type="hidden" name="animalId" value="@Model.AnimalId" />
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

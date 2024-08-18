@@ -1,0 +1,42 @@
+﻿@model AnimalProject.Models.Animal
+
+@{
+    ViewData["Title"] = "EditAnimal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Edit Animal</h3>
+
+
+
+<div class="edit-wrapper">
+    <form method="post" action="/Admin/Edit/@Model.AnimalId">
+        <div>
+            <label for="animalName" class="form-label"><strong>Name</strong></label>
+            <input type="text" class="form-control" id="animalName" name="Name" value="@Model.Name" readonly style="width: 300px; height: 30px;" />
+        </div>
+        <br>
+        <div>
+            <label for="animalCategory" class="form-label"><strong>Category</strong></label>
+            <input type="text" class="form-control" id="animalCategory" name="Category" value="@Model.Category?.Name" readonly style="width: 300px; height: 30px;" />
+        </div>
+        <br>
+        <div>
+            <label for="animalAge" class="form-label"><strong>Age</strong></label>
+            <input type="number" class="form-control" id="animalAge" name="Age" value="@Model.Age" readonly style="width: 300px; height: 30px;" />
+        </div>
+        <br>
+        <div>
+            <label for="animalDescription" class="form-label"><strong>Description</strong></label>
+            <input type="text" class="form-control" id="animalDescription" name="Description" value="@Model.Description" readonly style="width: 300px; height: 30px;" />
+        </div>
+        <br>
+        <input type="hidden" name="AnimalId" value="@Model.AnimalId" />
+
+        <div style="margin-top: 20px;">
+            <button type="button" class="btn btn-primary" id="editButton" onclick="enableEdit()">Edit</button>
+            <button type="submit" class="btn btn-success d-none" id="saveButton">Save</button>
+        </div>
+    </form>
+
+</div>
